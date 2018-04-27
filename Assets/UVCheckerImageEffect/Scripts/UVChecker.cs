@@ -29,6 +29,7 @@ public class UVChecker : CustomImageEffectBase {
     [Range(0,1)]
     public float alpha = 1;
 
+	// TODO: Automaticly register the shader so it is automaticly included in release builds.
     public override string ShaderName
     {
         get
