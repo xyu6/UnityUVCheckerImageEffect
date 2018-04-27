@@ -28,6 +28,12 @@ public class UVChecker : CustomImageEffectBase {
 
     [Range(0,1)]
     public float alpha = 1;
+	
+	#if DEBUG
+	[ReadOnly][SerializeField]
+	bool uvAndRealWorldMappingEnabled = false;
+	#endif
+	
 
 	// TODO: Automaticly register the shader so it is automaticly included in release builds.
     public override string ShaderName
@@ -54,7 +60,11 @@ public class UVChecker : CustomImageEffectBase {
         material.SetFloat("_Alpha", alpha);
 
         material.SetVector("_GridWidth", gridWidth);
-
+		
+		#if DEBUG
+		if(Time.frameCount % 10 == 0)
+			uvAndRealWorldMappingEnabled = Shader.IsKeywordEnabled( TeamLab.Unity.UVAndRealWorldMapperNT.Node.ShaderVariableIDs.keyword_Enable );
+		#endif
 
     }
     public void UpdateFadeMaskFlipRotation()
