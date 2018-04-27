@@ -1,4 +1,4 @@
-﻿Shader "Hidden/UVChecker"
+﻿Shader "Hidden/TeamLab/UVChecker"
 {
 	Properties
 	{

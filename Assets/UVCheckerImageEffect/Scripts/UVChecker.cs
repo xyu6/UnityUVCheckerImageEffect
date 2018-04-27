@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+namespace TeamLab.Unity
+{
+
 [ExecuteInEditMode]
 public class UVChecker : CustomImageEffectBase {
 
@@ -30,7 +33,7 @@ public class UVChecker : CustomImageEffectBase {
     {
         get
         {
-            return "Hidden/UVChecker";
+            return "Hidden/TeamLab/UVChecker";
         }
     }
 
@@ -108,3 +111,4 @@ public class UVChecker : CustomImageEffectBase {
         }
     }
 }
+} // end namespace

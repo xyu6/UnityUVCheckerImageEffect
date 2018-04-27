@@ -3,6 +3,9 @@
 using UnityEditor;
 #endif
 
+namespace TeamLab.Unity
+{
+
 [RequireComponent(typeof(Camera))]
 public abstract class CustomImageEffectBase : MonoBehaviour
 {
@@ -126,3 +129,4 @@ public abstract class CustomImageEffectBase : MonoBehaviour
     #endregion
 
 }
+} // end namespace
