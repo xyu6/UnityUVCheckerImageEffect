@@ -15,15 +15,18 @@
 		Pass
 		{
 			CGPROGRAM
+			#pragma target 5.0
 			#pragma vertex vert
 			#pragma fragment frag
 			
 			#pragma multi_compile _ROTATEFLAG_ANGLE0 _ROTATEFLAG_ANGLE90 _ROTATEFLAG_ANGLE180 _ROTATEFLAG_ANGLE270
+			#pragma multi_compile __ VIEW_SPACE_TRANSPOSE_ENABLE UV_RW_MAPNT UV_RW_MAPNT_90 UV_RW_MAPNT_180 UV_RW_MAPNT_270 UV_RW_MAPNT_SWAP
 			#pragma shader_feature _ _FLIP_X_ON
 			#pragma shader_feature _ _FLIP_Y_ON
 
 			#include "UnityCG.cginc"
 			#include "PhotoshopMath.cginc"
+			#include "../../../../../Scripts/UVandRealWorldMapperNT/UVAndRealWorldMapperNt.cginc"
 
 			float mod(float x, float y)
 			{
@@ -85,6 +88,7 @@
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv;
+				o.uv = UVAndRealWorldMapperNT_ConvertUVToMappedUV(v.uv);
 				return o;
 			}
 			
@@ -107,6 +111,7 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				half2 uv = i.uv.xy;
+				//half2 uv = UVAndRealWorldMapperNT_ConvertUVToMappedUV(i.uv).xy; // It is faster to do this conversion in the vertex shader.
 
 				// Flip
 #ifdef _FLIP_X_ON
