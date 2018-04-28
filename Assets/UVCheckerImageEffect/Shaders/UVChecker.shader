@@ -88,7 +88,7 @@
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv;
-				o.uv = UVAndRealWorldMapperNT_ConvertUVToMappedUV(v.uv);
+				//o.uv = UVAndRealWorldMapperNT_ConvertUVToMappedUV(v.uv); // if UV mapping is applied here the entire screen gets zoomed in, which is not correct.
 				return o;
 			}
 			
@@ -110,8 +110,8 @@
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				half2 uv = i.uv.xy;
-				//half2 uv = UVAndRealWorldMapperNT_ConvertUVToMappedUV(i.uv).xy; // It is faster to do this conversion in the vertex shader.
+				//half2 uv = i.uv.xy;
+				half2 uv = UVAndRealWorldMapperNT_ConvertUVToMappedUV(i.uv).xy; 
 
 				// Flip
 #ifdef _FLIP_X_ON
